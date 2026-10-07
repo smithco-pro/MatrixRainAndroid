@@ -1,6 +1,6 @@
 # Matrix Rain for Android
 
-An Android port of [Matrix Rain](../MatrixRain) (Windows 2.6.0). It makes an idle lab device generate realistic usage
+An Android port of [Matrix Rain](https://github.com/bdgarmon/MatrixRain) (Windows 2.6.0). It makes an idle lab device generate realistic usage
 for Workspace ONE UEM and Omnissa Intelligence DEX: synthetic load, a launch-and-dwell workday across real apps and
 websites, network probes, and on-demand fault events, all shown on a "matrix rain" status display.
 
