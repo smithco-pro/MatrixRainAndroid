@@ -1,0 +1,13 @@
+{
+  "name": "fault-sampler",
+  "description": "One of each Matrix Rain fault, spaced so the ANR finishes before the next fault.",
+  "steps": [
+    {"action": "fault", "fault": "handled"},
+    {"action": "wait", "seconds": 10},
+    {"action": "fault", "fault": "crash"},
+    {"action": "wait", "seconds": 10},
+    {"action": "fault", "fault": "anr"},
+    {"action": "wait", "seconds": 45},
+    {"action": "fault", "fault": "native"}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "workday-with-reboot",
+  "description": "Two-hour Workday, a reboot, then a CPU run. Reboots are capped at 3 per device per day.",
+  "steps": [
+    {"action": "start", "mode": "workday", "seconds": 7200, "wait": true},
+    {"action": "reboot"},
+    {"action": "wait", "seconds": 120},
+    {"action": "start", "profile": "node03", "wait": true}
+  ]
+}

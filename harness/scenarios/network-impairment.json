@@ -1,0 +1,11 @@
+{
+  "name": "network-impairment",
+  "description": "Latency probes running while Wi-Fi drops twice. USB adb only.",
+  "steps": [
+    {"action": "start", "mode": "network", "seconds": 900, "intensity": 70},
+    {"action": "wait", "seconds": 120},
+    {"action": "wifi-flap", "offSeconds": 60, "times": 2, "gapSeconds": 180},
+    {"action": "wait", "seconds": 120},
+    {"action": "stop"}
+  ]
+}

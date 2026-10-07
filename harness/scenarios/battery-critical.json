@@ -1,0 +1,7 @@
+{
+  "name": "battery-critical",
+  "description": "Simulated unplugged discharge through Intelligence's critical bands (16-20, 11-15, 0-10 %), then reset.",
+  "steps": [
+    {"action": "battery-drain", "from": 22, "to": 8, "stepSeconds": 60}
+  ]
+}
