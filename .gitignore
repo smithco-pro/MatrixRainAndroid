@@ -1,0 +1,12 @@
+.gradle/
+.gradle-home/
+build/
+local.properties
+.idea/
+*.iml
+.DS_Store
+captures/
+harness/out/
+.android-home/
+harness/devices.allow
+__pycache__/
