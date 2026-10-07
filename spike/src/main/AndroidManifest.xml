@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- Package visibility for launcher apps we rotate through. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="MR Spike"
+        android:allowBackup="false">
+
+        <activity
+            android:name=".SpikeActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Exported only to holders of DUMP (shell/system), so `am start-foreground-service` works from adb. -->
+        <service
+            android:name=".SpikeService"
+            android:exported="true"
+            android:permission="android.permission.DUMP"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Lab workload generator for DEX telemetry testing" />
+        </service>
+
+        <receiver
+            android:name=".ShellReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+
+        <!-- Faults run in their own process so the service survives them. -->
+        <receiver
+            android:name=".CrashLabReceiver"
+            android:exported="false"
+            android:process=":crashlab" />
+    </application>
+</manifest>
