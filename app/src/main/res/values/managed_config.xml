@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mc_enabled">Workloads enabled</string>
+    <string name="mc_enabled_desc">Kill switch. Off stops any running workload and refuses new ones from UEM, adb and the display.</string>
+    <string name="mc_local">Allow Go/Stop on the device</string>
+    <string name="mc_local_desc">Off makes the display read-only; runs then come only from UEM or adb.</string>
+    <string name="mc_title">Lab title shown on the display</string>
+    <string name="mc_battery">Minimum battery while unplugged (%)</string>
+    <string name="mc_battery_desc">Runs stop early below this level when the device is not charging.</string>
+    <string name="mc_command">Command</string>
+    <string name="mc_command_id">Command ID</string>
+    <string name="mc_command_id_desc">Change to any new value (for example a timestamp) to execute the command once.</string>
+    <string name="mc_profile">Profile</string>
+    <string name="mc_profile_desc">Legacy MatrixRain Node presets (600 s, no baseline). Other keys override the preset.</string>
+    <string name="mc_mode">Mode</string>
+    <string name="mc_sites">Workday sites</string>
+    <string name="mc_sites_desc">HTTPS URLs, one per line or comma-separated (1-64). Empty uses the built-in list.</string>
+    <string name="mc_apps">Workday apps</string>
+    <string name="mc_apps_desc">Package names to rotate, comma-separated (up to 32). Empty uses installed apps from the built-in list.</string>
+    <string name="mc_download">Network: bulk download URL</string>
+    <string name="mc_download_desc">HTTPS file you own or are allowed to load-test. Empty means latency probes only.</string>
+    <string name="mc_fault">Fault (for command=Fault)</string>
+    <string name="mc_fault_desc">Raised once per commandId in Matrix Rain itself; at most six per hour. Synthetic: tag the device so these are filtered in reports.</string>
+    <string-array name="mc_command_entries"><item>None</item><item>Start</item><item>Stop</item><item>Fault</item></string-array>
+    <string-array name="mc_command_values"><item>none</item><item>start</item><item>stop</item><item>fault</item></string-array>
+    <string-array name="mc_fault_entries"><item>(none)</item><item>App crash</item><item>ANR</item><item>Native crash</item><item>Handled exception</item></string-array>
+    <string-array name="mc_fault_values"><item></item><item>crash</item><item>anr</item><item>native</item><item>handled</item></string-array>
+    <string-array name="mc_profile_entries"><item>(none)</item><item>Node01 Baseline</item><item>Node02 Visualization</item><item>Node03 CPU</item><item>Node04 Memory</item><item>Node05 Disk</item><item>Node06 Science</item></string-array>
+    <string-array name="mc_profile_values"><item></item><item>node01</item><item>node02</item><item>node03</item><item>node04</item><item>node05</item><item>node06</item></string-array>
+    <string-array name="mc_mode_entries"><item>(profile default)</item><item>Baseline</item><item>Visualization</item><item>CPU</item><item>Memory</item><item>Disk I/O</item><item>Science / pi</item><item>Workday</item><item>Network</item></string-array>
+    <string-array name="mc_mode_values"><item></item><item>baseline</item><item>visualization</item><item>cpu</item><item>memory</item><item>disk</item><item>science</item><item>workday</item><item>network</item></string-array>
+</resources>

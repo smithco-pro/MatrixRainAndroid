@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    UEM managed configuration (Android Enterprise app restrictions). To start a run, set the run keys and
+    command=start, then change commandId to any new value; each commandId is acted on once.
+    Integers left at -1 and empty strings mean "not set" and fall back to the profile or built-in defaults.
+-->
+<restrictions xmlns:android="http://schemas.android.com/apk/res/android">
+    <restriction android:key="enabled" android:title="@string/mc_enabled" android:description="@string/mc_enabled_desc"
+        android:restrictionType="bool" android:defaultValue="true" />
+    <restriction android:key="allowLocalControl" android:title="@string/mc_local" android:description="@string/mc_local_desc"
+        android:restrictionType="bool" android:defaultValue="true" />
+    <restriction android:key="labTitle" android:title="@string/mc_title" android:restrictionType="string" android:defaultValue="" />
+    <restriction android:key="minBatteryPercent" android:title="@string/mc_battery" android:description="@string/mc_battery_desc"
+        android:restrictionType="integer" android:defaultValue="30" />
+
+    <restriction android:key="command" android:title="@string/mc_command" android:restrictionType="choice"
+        android:entries="@array/mc_command_entries" android:entryValues="@array/mc_command_values" android:defaultValue="none" />
+    <restriction android:key="commandId" android:title="@string/mc_command_id" android:description="@string/mc_command_id_desc"
+        android:restrictionType="string" android:defaultValue="" />
+
+    <restriction android:key="profile" android:title="@string/mc_profile" android:description="@string/mc_profile_desc"
+        android:restrictionType="choice" android:entries="@array/mc_profile_entries" android:entryValues="@array/mc_profile_values" android:defaultValue="" />
+    <restriction android:key="mode" android:title="@string/mc_mode" android:restrictionType="choice"
+        android:entries="@array/mc_mode_entries" android:entryValues="@array/mc_mode_values" android:defaultValue="" />
+    <restriction android:key="seconds" android:title="Duration (1-3600 s)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="baselineSeconds" android:title="Baseline (0-600 s)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="intensity" android:title="Intensity (1-95 %)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="threads" android:title="Threads (1-32)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="memoryMiB" android:title="Memory (8-4096 MiB)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="diskMiB" android:title="Scratch file (4-256 MiB)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="writeLimitMiB" android:title="Write budget (MiB)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="sites" android:title="@string/mc_sites" android:description="@string/mc_sites_desc"
+        android:restrictionType="string" android:defaultValue="" />
+    <restriction android:key="apps" android:title="@string/mc_apps" android:description="@string/mc_apps_desc"
+        android:restrictionType="string" android:defaultValue="" />
+    <restriction android:key="downloadMiB" android:title="Network: bulk download size (0-256 MiB)" android:restrictionType="integer" android:defaultValue="-1" />
+    <restriction android:key="downloadUrl" android:title="@string/mc_download" android:description="@string/mc_download_desc"
+        android:restrictionType="string" android:defaultValue="" />
+    <restriction android:key="dailyDataBudgetMiB" android:title="Network: daily download budget (MiB)" android:restrictionType="integer" android:defaultValue="512" />
+    <restriction android:key="allowMeteredData" android:title="Network: allow bulk downloads on metered networks" android:restrictionType="bool" android:defaultValue="false" />
+    <restriction android:key="fault" android:title="@string/mc_fault" android:description="@string/mc_fault_desc" android:restrictionType="choice"
+        android:entries="@array/mc_fault_entries" android:entryValues="@array/mc_fault_values" android:defaultValue="" />
+    <restriction android:key="diskMiBPerSecond" android:title="Disk rate ceiling (1-256 MiB/s)" android:restrictionType="integer" android:defaultValue="-1" />
+</restrictions>

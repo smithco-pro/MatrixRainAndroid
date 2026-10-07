@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Workday: bring apps to the foreground from the background, and keep the screen on over them. -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Optional: lets the Workday notice a person using the device and pause. Granted in Settings or by adb. -->
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" xmlns:tools="http://schemas.android.com/tools" tools:ignore="ProtectedPermissions" />
+    <!-- Exact alarms carry the background foreground-service start exemption used by managed-config commands. -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" android:maxSdkVersion="32" />
+
+    <!-- Package visibility for the Workday rotation: launcher apps, a browser for https, viewers for text/csv. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="text/*" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".MatrixRainApp"
+        android:label="@string/app_name"
+        android:allowBackup="false"
+        android:supportsRtl="true">
+
+        <meta-data android:name="android.content.APP_RESTRICTIONS" android:resource="@xml/app_restrictions" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Shell control: exported only to holders of android.permission.DUMP (shell and system), so
+            `adb shell am start-foreground-service -n com.aftersix.matrixrain/.service.WorkloadService -a ...` works
+            while other apps are refused.
+        -->
+        <service
+            android:name=".service.WorkloadService"
+            android:exported="true"
+            android:permission="android.permission.DUMP"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Lab workload generator that produces device usage for DEX telemetry testing" />
+        </service>
+
+        <provider
+            android:name=".service.StatusProvider"
+            android:authorities="com.aftersix.matrixrain.status"
+            android:exported="true"
+            android:permission="android.permission.DUMP" />
+        <provider
+            android:name=".workday.WorkdayFileProvider"
+            android:authorities="com.aftersix.matrixrain.files"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <!-- Fault events run in their own process so crashes and ANRs never take down a workload. -->
+        <receiver
+            android:name=".fault.CrashLabReceiver"
+            android:exported="false"
+            android:process=":crashlab" />
+
+        <receiver android:name=".control.BootReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".control.ConfigAlarmReceiver" android:exported="false" />
+    </application>
+</manifest>
